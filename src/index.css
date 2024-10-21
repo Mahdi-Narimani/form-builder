@@ -1,3 +1,74 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+        @apply w-[8px]
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        @apply bg-transparent
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        @apply bg-slate-950 rounded-lg
+    }
+}
+
+@layer utilities {
+    .visibleFieldAction {
+        animation: visible-animate 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes visible-animate {
+        from {
+            transform: translateY(-50%);
+            opacity: .2;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .moveUpAnimate {
+        animation: move-up 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes move-up {
+        from {
+            transform: translateY(0);
+        }
+
+        to {
+            transform: translateY(-10%)
+        }
+    }
+
+    .visibleFormDataJSON {
+        animation: visible-form 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+
+    @keyframes visible-form {
+        from {
+            opacity: .2;
+            transform: translateY(-1000%);
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+}
