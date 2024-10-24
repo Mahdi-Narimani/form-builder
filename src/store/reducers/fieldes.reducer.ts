@@ -27,6 +27,11 @@ export const fieldsSlice = createSlice({
     name: "fields",
     initialState,
     reducers: {
+        reorderFields: (state, action) => {
+            const { sourceIndex, destinationIndex } = action.payload;
+            const [removed] = state.form.components.splice(sourceIndex, 1);
+            state.form.components.splice(destinationIndex, 0, removed);
+        },
         createNewField: (state, action: PayloadAction) => {
             return createNewFieldAction(state, action.payload);
         },
@@ -36,12 +41,17 @@ export const fieldsSlice = createSlice({
         saveForm: (state) => {
             return saveFormFields(state);
         },
-        restorePreviousForm: (state, action: PayloadAction) => {
+        restorePreviousForm: (_, action: PayloadAction) => {
             const previousState = JSON.parse(action.payload as any);
             return previousState;
+        },
+        convertDataJsonToForm: (_, action: PayloadAction) => {
+            const newDataObject = JSON.parse(action.payload as any);
+            return newDataObject;
         },
     },
 });
 
-export const { createNewField, deleteField, saveForm, restorePreviousForm } = fieldsSlice.actions;
+export const { createNewField, deleteField, saveForm, restorePreviousForm, convertDataJsonToForm, reorderFields } =
+    fieldsSlice.actions;
 export default fieldsSlice.reducer;

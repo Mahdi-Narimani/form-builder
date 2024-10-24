@@ -1,7 +1,13 @@
 import { useDispatch } from "react-redux";
 import { createNewField, deleteField } from "../../store/reducers/fieldes.reducer";
 
-export const FieldActions = ({ fieldId, fieldType }: { fieldId: string; fieldType: string }) => {
+export const FieldActions = ({
+    fieldId,
+    fieldType,
+}: {
+    fieldId: string;
+    fieldType: string;
+}) => {
     const dispatch = useDispatch();
 
     const deleteFieldHandler = (id: string) => {
@@ -23,6 +29,11 @@ export const FieldActions = ({ fieldId, fieldType }: { fieldId: string; fieldTyp
             <button onClick={() => copyFieldHandler(fieldType)}>
                 <i className="fa-solid fa-copy hover:text-green-500 transition-all"></i>
             </button>
+            {/* <button
+                className="cu text-white rounded hover:text-blue-500"
+            >
+                <i className="fa-solid fa-arrows-up-down"></i>
+            </button> */}
         </div>
     );
 };
