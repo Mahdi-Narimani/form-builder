@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import createNewFieldAction from "../actions/createNewField.action";
 import deleteFieldAction from "../actions/deleteField.action";
 import saveFormFields from "../actions/saveFormFields.action";
+import reorderFieldsAction from "../actions/reorderFields.action";
 
 export interface FormInitialState {
     form: {
@@ -27,18 +28,16 @@ export const fieldsSlice = createSlice({
     name: "fields",
     initialState,
     reducers: {
-        reorderFields: (state, action) => {
-            const { sourceIndex, destinationIndex } = action.payload;
-            const [removed] = state.form.components.splice(sourceIndex, 1);
-            state.form.components.splice(destinationIndex, 0, removed);
+        reorderFields: (state: FormInitialState, action: PayloadAction) => {
+            return reorderFieldsAction(state, action.payload);
         },
-        createNewField: (state, action: PayloadAction) => {
-            return createNewFieldAction(state, action.payload);
+        createNewField: (state: FormInitialState, action: PayloadAction) => {
+            return createNewFieldAction(state, action.payload as any);
         },
-        deleteField: (state, action: PayloadAction) => {
+        deleteField: (state: FormInitialState, action: PayloadAction) => {
             return deleteFieldAction(state, action.payload as any);
         },
-        saveForm: (state) => {
+        saveForm: (state: FormInitialState) => {
             return saveFormFields(state);
         },
         restorePreviousForm: (_, action: PayloadAction) => {

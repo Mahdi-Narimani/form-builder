@@ -2,7 +2,7 @@ import { checkboxField, dropdownField, radioGroupField, textField } from "../../
 import { addNewField } from "../../util";
 import { FormInitialState } from "../reducers/fieldes.reducer";
 
-const createNewFieldAction = (state: FormInitialState, type: any) => {
+const createNewFieldAction = (state: FormInitialState, type: string) => {
     switch (type) {
         case "textfield": {
             return addNewField(state, textField, "textfield");

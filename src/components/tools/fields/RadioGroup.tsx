@@ -1,9 +1,6 @@
-interface Props {
-    id: string;
-    label: string;
-}
+import { RadioGroupField } from "../../../types/fieldsProperties";
 
-const RadioGroup = ({ id, label }: Props) => {
+const RadioGroup = ({ id, type, label, options }: RadioGroupField) => {
     return (
         <div
             id={id}

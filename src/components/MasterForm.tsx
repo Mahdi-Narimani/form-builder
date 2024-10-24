@@ -2,8 +2,8 @@ import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { createNewField, reorderFields } from "../store/reducers/fieldes.reducer";
-import Field from "./tools/Field";
 import { DragDropContext, Droppable, DroppableProvided } from "react-beautiful-dnd";
+import Field from "./tools/Field";
 
 const MasterForm = () => {
     const fields = useSelector((state: RootState) => state.fields).form.components;
@@ -26,7 +26,7 @@ const MasterForm = () => {
         if (destination.index === source.index) return; // اگر در همان مکان باشد، کاری انجام نده
 
         // جابجا کردن آیتم‌ها
-        dispatch(reorderFields({ sourceIndex: source.index, destinationIndex: destination.index }));
+        dispatch(reorderFields({ sourceIndex: source.index, destinationIndex: destination.index } as any));
     };
 
     return (
@@ -40,13 +40,14 @@ const MasterForm = () => {
                         {...provided.droppableProps}
                         ref={provided.innerRef}
                     >
-                        {fields.map((field, index) => (
+                        {fields.map((field: any, index: number) => (
                             <Field
                                 key={field.id}
-                                type={field.type}
-                                id={field.id}
-                                label={field.label}
                                 index={index}
+                                id={field.id}
+                                type={field.type}
+                                label={field.label}
+                                field={field}
                             />
                         ))}
                         {provided.placeholder}

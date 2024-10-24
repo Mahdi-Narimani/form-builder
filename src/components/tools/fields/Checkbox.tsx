@@ -1,17 +1,27 @@
-interface Props {
-    id: string;
-    label: string;
-}
+import { CheckboxField } from "../../../types/fieldsProperties";
 
-const Checkbox = ({ id, label }: Props) => {
+const Checkbox = ({ id, type, label, options }: CheckboxField) => {
     return (
-        <div className="flex gap-2 items-center">
-            <input
-                type="checkbox"
-                className="size-4 text-slate-100 focus:ring-2 focus:ring-slate-900 accent-slate-600 shadow-lg rounded"
-                id={id}
-            />
-            <span>{label}</span>
+        <div
+            id={id}
+            className="flex flex-col gap-2"
+        >
+            <p>{label}</p>
+            {options.map((option: string) => (
+                <label
+                    key={option}
+                    htmlFor={option}
+                    className="flex items-center gap-2"
+                >
+                    <input
+                        type={type}
+                        name={option}
+                        value={option}
+                        className="size-4 text-slate-100 focus:ring-2 focus:ring-slate-900 accent-slate-600 shadow-lg rounded"
+                    />
+                    <span className="capitalize">{option}</span>
+                </label>
+            ))}
         </div>
     );
 };

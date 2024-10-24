@@ -1,10 +1,16 @@
 import Checkbox from "./fields/Checkbox";
 import Dropdown from "./fields/Dropdown";
 import RadioGroup from "./fields/RadioGroup";
-import TextField from "./fields/TextField";
+import Text from "./fields/TextField";
 import FieldProvider from "./FieldProvider";
+import { FormField } from "../../types/fieldsProperties";
 
-const Field = ({ type, id, label, index }: any) => {
+interface FieldProps {
+    index: number;
+    field: any;
+}
+
+const Field = ({ type, index, id, label, field }: FieldProps & FormField) => {
     switch (type) {
         case "textfield":
             return (
@@ -13,9 +19,12 @@ const Field = ({ type, id, label, index }: any) => {
                     fieldType={type}
                     index={index}
                 >
-                    <TextField
+                    <Text
                         id={id}
+                        type={type}
                         label={label}
+                        maxLength={field.maxLength}
+                        placeholder={field.placeholder}
                     />
                 </FieldProvider>
             );
@@ -30,22 +39,9 @@ const Field = ({ type, id, label, index }: any) => {
                 >
                     <Checkbox
                         id={id}
+                        type={type}
                         label={label}
-                    />
-                </FieldProvider>
-            );
-            break;
-
-        case "radiogroup":
-            return (
-                <FieldProvider
-                    fieldId={id}
-                    fieldType={type}
-                    index={index}
-                >
-                    <RadioGroup
-                        id={id}
-                        label={label}
+                        options={field.options}
                     />
                 </FieldProvider>
             );
@@ -60,7 +56,27 @@ const Field = ({ type, id, label, index }: any) => {
                 >
                     <Dropdown
                         id={id}
+                        type={type}
                         label={label}
+                        options={field.options}
+                        multiple={field.multiple}
+                    />
+                </FieldProvider>
+            );
+            break;
+
+        case "radiogroup":
+            return (
+                <FieldProvider
+                    fieldId={id}
+                    fieldType={type}
+                    index={index}
+                >
+                    <RadioGroup
+                        id={id}
+                        type={type}
+                        label={label}
+                        options={field.options}
                     />
                 </FieldProvider>
             );
